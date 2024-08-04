@@ -1,14 +1,16 @@
+import React from "react";
+import css from './TodoInput.module.css';
 import { RiChatNewLine } from "react-icons/ri";
-import './TodoInput.css'
+
 const TodoInput = () => {
-    return (
-        <section className={'container'}>
-            <form className={'formContainer'}>
-                <input className={'input'}/>
-            </form>
-            <button><RiChatNewLine/></button>
-        </section>
-    )
+  return (
+    <section className={css.container}>
+      <form className={css.formContainer}>
+        <input className={css.input} value={''} placeholder="해야할 Todo"/>
+      </form>
+      <button className={css.enter}><RiChatNewLine/></button>
+    </section>
+  )
 }
 
 export default TodoInput

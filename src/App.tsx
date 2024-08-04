@@ -1,17 +1,19 @@
 import React from 'react';
 import './App.css';
-
-
+import TodoList from "./List/TodoList";
+import TodoInput from "./Input/TodoInput";
 import TodoHeader from "./Header/TodoHeader";
-import TodoInput from './Input/TodoInput';
-
-
+import Divider from "./Divider/Divider";
+import TodoTools from './Tools/TodoListTools';
 
 function App() {
   return (
     <main className="App">
       <TodoHeader />
-      <TodoInput/>
+      <TodoInput />
+      <TodoTools />
+      <Divider />
+      <TodoList />
     </main>
   );
 }
