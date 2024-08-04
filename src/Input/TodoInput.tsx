@@ -1,28 +1,38 @@
 import React, {ChangeEvent, FormEvent} from "react";
 import css from './TodoInput.module.css';
 import { RiChatNewLine } from "react-icons/ri";
+import {useInputTodoDispatch, useInputTodoState, useTodoDispatch} from "../Todo/TodoProvider";
 
-type TodoInputProps = {
-  text: string;
-  onTextChange: (text:string) => void
-  onSubmit: () => void
-}
+const TodoInput = () => {
+  const todoDispatch = useTodoDispatch();
+  const inputState = useInputTodoState();
+  const inputDispatch = useInputTodoDispatch();
 
-const TodoInput = (props:TodoInputProps) => {
   const handleInputChanged = (e:ChangeEvent<HTMLInputElement>) => {
-    props.onTextChange(e.target.value)
+    inputDispatch({
+      type: 'change',
+      payload: e.target.value
+    })
   }
 
   const handleSubmit = (e:FormEvent) => {
+   
     e.preventDefault();
-    props.onSubmit()
+
+    todoDispatch({
+      type: 'add',
+      payload: { text: inputState.text }
+    })
+    inputDispatch({
+      type: 'clear'
+    })
   }
 
   return (
     <section className={css.container}>
       <form className={css.formContainer} onSubmit={handleSubmit}>
-        <input className={css.input} value={props.text} onChange={handleInputChanged}/>
-        <button type='submit' className={css.enter} disabled={!props.text}><RiChatNewLine/></button>
+        <input className={css.input} value={inputState.text} onChange={handleInputChanged} placeholder="해야할 Todo"/>
+        <button type='submit' className={css.enter} disabled={!inputState.text}><RiChatNewLine/></button>
       </form>
     </section>
   )

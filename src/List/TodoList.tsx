@@ -1,39 +1,21 @@
 import css from './TodoList.module.css'
 import TodoItem from "../ListItem/TodoItem";
-import {useCallback} from "react";
+import { useTodoState } from "../Todo/TodoProvider";
 
-type TodoListProps = {
-  todos: {
-    id: number
-    text:string
-    isChecked: boolean
-  }[]
-  onToggleClick: (id: number) => void
-  onRemoveClick: (id: number) => void
-}
-
-const TodoList = (props:TodoListProps) => {
-  const handleToggleClick = useCallback((id:number) => {
-    props.onToggleClick(id)
-  }, [props])
-
-  const handleRemoveClick = useCallback((id:number) => {
-    props.onRemoveClick(id)
-  }, [props])
+const TodoList = () => {
+  const todoState = useTodoState();
 
   return (
     <section>
-    <ol className={css.container}>
-      {
-        props.todos.map((todo) => {
-          return (
-            <TodoItem key={todo.id} id={todo.id} text={todo.text} isChecked={todo.isChecked}
-                      onToggleClick={handleToggleClick}
-                      onRemoveClick={handleRemoveClick} />
-          )
-        })
-      }
-    </ol>
+      <ol className={css.container}>
+        {
+          todoState.todos.map((todo) => {
+            return (
+              <TodoItem key={todo.id} id={todo.id} text={todo.text} isChecked={todo.isChecked} />
+            )
+          })
+        }
+      </ol>
     </section>
   )
 }
