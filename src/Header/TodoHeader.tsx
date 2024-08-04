@@ -1,15 +1,19 @@
+import React from "react";
 import styles from './TodoHeader.module.css'
 
-const TodoHeader = () => {
-    return(
-        <header>
-            <h1 className={styles.headerTitle}>
-                <mark className={styles.todoCount}>5</mark>
-                개의 할일
-            </h1>
+type TodoHeaderProps = {
+  count: number
+}
 
-        </header>
-    )
+const TodoHeader = (props:TodoHeaderProps) => {
+  return (
+    <header>
+      <h1 className={styles.headerTitle}>
+        <mark className={styles.todoCount}>{props.count}</mark>
+        개의 할일
+      </h1>
+    </header>
+  )
 }
 
 export default TodoHeader
